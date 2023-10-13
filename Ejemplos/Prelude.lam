@@ -26,6 +26,20 @@ def add = \n m s z . n s (m s z)
 def mult = \n m s z . n (m s) z
 
 def pred = \ n . fst (n (\p . pair (snd p) (suc (snd p))) (pair zero zero))
+def minus = \n m . m pred n
+
+--Operadores de comparacion de Numerales
+def ge = \n m . is0 (minus m n)
+
+def le = \n m . ge m n
+
+def lt = \n m . not (ge n m)
+
+def gt = \n m . lt m n
+
+def eq = \n m . and (ge n m) (le n m)
+
+def neq = not (eq n m)
 
 --Listas
 def nil = \c n . n
