@@ -1,0 +1,27 @@
+
+def minus = \n m . m pred n
+
+-- Comparacion de numerales de Church
+
+def ge = \n m . is0 (minus m n)
+
+def le = \n m . ge m n
+
+def lt = \n m . not (ge n m)
+
+def gt = \n m . lt m n
+
+def eq = \n m . and (ge n m) (le n m)
+
+def neq = not (eq n m)
+
+-- Divisores
+
+def mod = Y (\f n m . (ge n m) (f (minus n m) m) n) -- n % m
+
+def divide  =  \n m . is0 (mod n m) -- true si m divide a n, false en otro caso
+
+def divisores' = Y (\f n k . (gt k n) nil ((divide n k) (cons k (f n (suc k))) (f n (suc k))))
+
+def divisores  = \n . divisores' n 1
+
